@@ -55,10 +55,12 @@ class WebDriverChrome(object):
                 for j in temp3:
                     temp1.append(j)
             print(f'Urls: {len(set(temp1))}')
+            if(len(set(temp1)) > 9500):
+                break
         
         
         
-            img_list = list(dict.fromkeys(temp1))
+            
             # image_name = image_element.get_attribute('alt')
             # if image_name == '':
             #     image_name = 'demo name'
@@ -66,8 +68,8 @@ class WebDriverChrome(object):
 
             # print('get image link %s...' % image_name)
             # img_list.append(image_link)
-
         self.driver.quit()
+        img_list = list(dict.fromkeys(temp1))
         print(f'number of urls: {len(img_list)}')
         with open('image_url_list.txt', 'w') as f:
             for item in img_list:
