@@ -32,7 +32,7 @@ class WebDriverChrome(object):
         time.sleep(2)
 
 
-        scroll_counter = 0
+        scroll_counter = 30
         for i in range(1):
             print(f'{scroll_counter} scroll times')
             scroll_counter += 1
@@ -51,7 +51,7 @@ class WebDriverChrome(object):
         
         
         
-        for image_element in image_elements:
+        for image_element in temp1:
             # image_name = image_element.get_attribute('alt')
             # if image_name == '':
             #     image_name = 'demo name'
