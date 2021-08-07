@@ -1,27 +1,14 @@
 import time
 import undetected_chromedriver.v2 as webdriver
 from xvfbwrapper import Xvfb
-# from selenium.webdriver.chrome.options import Options
-# from selenium.webdriver.support.ui import WebDriverWait
-# from selenium.webdriver.support import expected_conditions as EC
-# from selenium.webdriver.common.by import By
-# from selenium.webdriver.common.keys import Keys
-from xvfbwrapper import Xvfb
 
 class WebDriverChrome(object):
 
     def __init__(self):
-        # self.url_article = articles.daily_url
-        # self.url_home = ['/xem-mua-luon.chn','/hello-genz.html','/nhom-chu-de/emagazine.chn']
         self.driver = self.StartWebdriver()
 
     def StartWebdriver(self):
         options = webdriver.ChromeOptions()
-        # options.add_argument("start-maximized")
-        # options.add_argument("--incognito")
-        # options.add_experimental_option("excludeSwitches", ["enable-automation"])
-        # options.add_experimental_option("useAutomationExtension", False)
-        # options.add_experimental_option("excludeSwitches", ["disable-popup-blocking"])
         # options.add_argument(f'user-agent={secrets.choice(articles.user_agent)}')
         options.add_argument('--no-first-run --no-service-autorun --password-store=basic')
         options.add_argument('--user-data-dir=/home/test1/.config/google-chrome/Default')
@@ -35,25 +22,14 @@ class WebDriverChrome(object):
         img_list = []
         URL = "https://unsplash.com/s/photos/fire"
 
-        # options = Options()
-        # options.headless = True
-
         print('Openning Chrome...', end='\n\n')
-
-        # browser = webdriver.Chrome(options=options)
+        
         self.driver.get(URL)
-
-        # time.sleep(1)
         print('Please wait...', end="\n\n")
-
-        # browser.get(URL)
         time.sleep(2)
 
-        # result_page = self.driver.find_element_by_tag_name("body")
-        
-        no_of_pagedowns = 10
+        no_of_pagedowns = 10000
 
-        print('Please wait...', end="\n\n")
         scroll_counter = 0
         while no_of_pagedowns:
             print(f'{scroll_counter} scroll times')
@@ -63,18 +39,18 @@ class WebDriverChrome(object):
             no_of_pagedowns -= 1
 
         image_elements = self.driver.find_elements_by_class_name('oCCRx')
+        
         for image_element in image_elements:
-
-            image_name = image_element.get_attribute('alt')
-            if image_name == '':
-                image_name = 'demo name'
+            # image_name = image_element.get_attribute('alt')
+            # if image_name == '':
+            #     image_name = 'demo name'
             image_link = image_element.get_attribute('src')
 
-            print('get image link %s...' % image_name)
+            # print('get image link %s...' % image_name)
             img_list.append(image_link)
 
         self.driver.quit()
-
+        print(f'number of urls: {len(img_list)}')
         with open('image_url_list.txt', 'w') as f:
             for item in img_list:
                 f.write("%s\n" % item)
