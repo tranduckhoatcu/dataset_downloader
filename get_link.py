@@ -64,6 +64,7 @@ class WebDriverChrome(object):
                 with open('image_url_list_{temp1_count}.txt', 'w') as f:
                     for item in img_list:
                         f.write("%s\n" % item)
+                temp1 = []
             if(temp1_count > 9500):
                 break
         
