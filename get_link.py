@@ -22,7 +22,7 @@ class WebDriverChrome(object):
     def save_txt(self):
         img_list = []
         temp1 = []
-        temp2 = []
+
         URL = "https://unsplash.com/s/photos/fire"
 
         print('Openning Chrome...', end='\n\n')
@@ -40,30 +40,37 @@ class WebDriverChrome(object):
             time.sleep(secrets.SystemRandom().uniform(1,1.25))
             self.driver.execute_script("window.scrollBy(0,-"+str(secrets.SystemRandom().uniform(800,1000))+");")
             time.sleep(secrets.SystemRandom().uniform(1,1.25))
-            
-            # if (i == 0):
-            #     temp1 = image_elements
-            # else:
-            #     temp2 = list(set(image_elements) - set(temp1))
-            #     for j in temp2:
-            #         temp1.append(j)
+            image_elements = self.driver.find_elements_by_class_name('oCCRx')
+            # print(image_elements)
+            if (i == 0):
+                for image_element in image_elements:
+                    image_link = image_element.get_attribute('src')
+                    temp1.append(image_link)
+            else:
+                temp2 = []
+                temp3 = []
+                for image_element in image_elements:
+                    image_link = image_element.get_attribute('src')
+                    temp2.append(image_link)
+                temp3 = list(set(temp2) - set(temp1))
+                for j in temp3:
+                    temp1.append(j)
         
         
-        image_elements = self.driver.find_elements_by_class_name('oCCRx')
-        print(image_elements)
-        for image_element in temp1:
+        
+        
             # image_name = image_element.get_attribute('alt')
             # if image_name == '':
             #     image_name = 'demo name'
-            image_link = image_element.get_attribute('src')
+            
 
             # print('get image link %s...' % image_name)
-            img_list.append(image_link)
+            # img_list.append(image_link)
 
         self.driver.quit()
-        print(f'number of urls: {len(img_list)}')
+        print(f'number of urls: {len(temp1)}')
         with open('image_url_list.txt', 'w') as f:
-            for item in img_list:
+            for item in temp1:
                 f.write("%s\n" % item)
 
         print('Images link successfully saved! Please check image_url_list.txt!')
