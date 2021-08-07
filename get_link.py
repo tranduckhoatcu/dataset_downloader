@@ -33,24 +33,24 @@ class WebDriverChrome(object):
 
 
         scroll_counter = 0
-        for i in range(1):
+        for i in range(2):
             print(f'{scroll_counter} scroll times')
             scroll_counter += 1
             self.driver.execute_script("window.scrollBy(0,"+str(secrets.SystemRandom().uniform(1800,2000))+");")
             time.sleep(secrets.SystemRandom().uniform(1,1.25))
             self.driver.execute_script("window.scrollBy(0,-"+str(secrets.SystemRandom().uniform(800,1000))+");")
             time.sleep(secrets.SystemRandom().uniform(1,1.25))
-            image_elements = self.driver.find_elements_by_class_name('oCCRx')
-            # print(image_elements)
-            if (i == 0):
-                temp1 = image_elements
-            else:
-                temp2 = list(set(image_elements) - set(temp1))
-                for j in temp2:
-                    temp1.append(j)
+            
+            # if (i == 0):
+            #     temp1 = image_elements
+            # else:
+            #     temp2 = list(set(image_elements) - set(temp1))
+            #     for j in temp2:
+            #         temp1.append(j)
         
         
-        
+        image_elements = self.driver.find_elements_by_class_name('oCCRx')
+        print(image_elements)
         for image_element in temp1:
             # image_name = image_element.get_attribute('alt')
             # if image_name == '':
