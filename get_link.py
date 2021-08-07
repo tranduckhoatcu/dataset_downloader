@@ -21,6 +21,8 @@ class WebDriverChrome(object):
 
     def save_txt(self):
         img_list = []
+        temp1 = []
+        temp2 = []
         URL = "https://unsplash.com/s/photos/fire"
 
         print('Openning Chrome...', end='\n\n')
@@ -29,19 +31,25 @@ class WebDriverChrome(object):
         print('Please wait...', end="\n\n")
         time.sleep(2)
 
-        no_of_pagedowns = 50
 
         scroll_counter = 0
-        while no_of_pagedowns:
+        for i in range(1)
             print(f'{scroll_counter} scroll times')
             scroll_counter += 1
             self.driver.execute_script("window.scrollBy(0,"+str(secrets.SystemRandom().uniform(1800,2000))+");")
             time.sleep(secrets.SystemRandom().uniform(1,1.25))
             self.driver.execute_script("window.scrollBy(0,-"+str(secrets.SystemRandom().uniform(800,1000))+");")
             time.sleep(secrets.SystemRandom().uniform(1,1.25))
-            no_of_pagedowns -= 1
-
-        image_elements = self.driver.find_elements_by_class_name('oCCRx')
+            image_elements = self.driver.find_elements_by_class_name('oCCRx')
+            print(image_elements)
+            if (i == 0):
+                temp1 = image_elements
+            else:
+                temp2 = list(set(image_elements) - set(temp1))
+                for j in temp2:
+                    temp1.append(j)
+        
+        
         
         for image_element in image_elements:
             # image_name = image_element.get_attribute('alt')
