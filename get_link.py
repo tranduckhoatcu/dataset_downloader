@@ -1,5 +1,6 @@
 import time
 import undetected_chromedriver.v2 as webdriver
+import secrets
 from xvfbwrapper import Xvfb
 
 class WebDriverChrome(object):
@@ -28,14 +29,16 @@ class WebDriverChrome(object):
         print('Please wait...', end="\n\n")
         time.sleep(2)
 
-        no_of_pagedowns = 10000
+        no_of_pagedowns = 50
 
         scroll_counter = 0
         while no_of_pagedowns:
             print(f'{scroll_counter} scroll times')
             scroll_counter += 1
-            self.driver.execute_script("window.scrollBy(0,"+str(5000)+");")
-            time.sleep(2)
+            self.driver.execute_script("window.scrollBy(0,"+str(secrets.SystemRandom().uniform(1800,2000))+");")
+            time.sleep(secrets.SystemRandom().uniform(1,1.25))
+            self.driver.execute_script("window.scrollBy(0,-"+str(secrets.SystemRandom().uniform(800,1000))+");")
+            time.sleep(secrets.SystemRandom().uniform(1,1.25))
             no_of_pagedowns -= 1
 
         image_elements = self.driver.find_elements_by_class_name('oCCRx')
