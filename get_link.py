@@ -29,7 +29,7 @@ class WebDriverChrome(object):
         print('Please wait...', end="\n\n")
         time.sleep(2)
 
-        no_of_pagedowns = 100
+        no_of_pagedowns = 50
 
         scroll_counter = 0
         while no_of_pagedowns:
@@ -62,7 +62,7 @@ class WebDriverChrome(object):
 
 
 if __name__ == '__main__':
-    vdisplay = Xvfb(width=800, height=1280)
+    vdisplay = Xvfb(width=1920, height=1080)
     vdisplay.start()
     Crawl = WebDriverChrome()
     Crawl.save_txt()
