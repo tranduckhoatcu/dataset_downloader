@@ -11,8 +11,8 @@ from xvfbwrapper import Xvfb
 class WebDriverChrome(object):
 
     def __init__(self):
-        self.url_article = articles.daily_url
-        self.url_home = ['/xem-mua-luon.chn','/hello-genz.html','/nhom-chu-de/emagazine.chn']
+        # self.url_article = articles.daily_url
+        # self.url_home = ['/xem-mua-luon.chn','/hello-genz.html','/nhom-chu-de/emagazine.chn']
         self.driver = self.StartWebdriver()
 
     def StartWebdriver(self):
