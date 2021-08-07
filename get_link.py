@@ -31,55 +31,55 @@ class WebDriverChrome(object):
         return driver
 
 
-def save_txt(self):
-    img_list = []
-    URL = "https://unsplash.com/s/photos/fire"
+    def save_txt(self):
+        img_list = []
+        URL = "https://unsplash.com/s/photos/fire"
 
-    # options = Options()
-    # options.headless = True
+        # options = Options()
+        # options.headless = True
 
-    print('Openning Chrome...', end='\n\n')
+        print('Openning Chrome...', end='\n\n')
 
-    # browser = webdriver.Chrome(options=options)
-    self.driver.get(URL)
+        # browser = webdriver.Chrome(options=options)
+        self.driver.get(URL)
 
-    # time.sleep(1)
-    print('Please wait...', end="\n\n")
+        # time.sleep(1)
+        print('Please wait...', end="\n\n")
 
-    # browser.get(URL)
-    time.sleep(2)
-
-    # result_page = self.driver.find_element_by_tag_name("body")
-    
-    no_of_pagedowns = 10
-
-    print('Please wait...', end="\n\n")
-    scroll_counter = 0
-    while no_of_pagedowns:
-        print(f'{scroll_counter} scroll times')
-        scroll_counter += 1
-        self.driver.execute_script("window.scrollBy(0,"+str(5000)+");")
+        # browser.get(URL)
         time.sleep(2)
-        no_of_pagedowns -= 1
 
-    image_elements = self.driver.find_elements_by_class_name('oCCRx')
-    for image_element in image_elements:
+        # result_page = self.driver.find_element_by_tag_name("body")
+        
+        no_of_pagedowns = 10
 
-        image_name = image_element.get_attribute('alt')
-        if image_name == '':
-            image_name = 'demo name'
-        image_link = image_element.get_attribute('src')
+        print('Please wait...', end="\n\n")
+        scroll_counter = 0
+        while no_of_pagedowns:
+            print(f'{scroll_counter} scroll times')
+            scroll_counter += 1
+            self.driver.execute_script("window.scrollBy(0,"+str(5000)+");")
+            time.sleep(2)
+            no_of_pagedowns -= 1
 
-        print('get image link %s...' % image_name)
-        img_list.append(image_link)
+        image_elements = self.driver.find_elements_by_class_name('oCCRx')
+        for image_element in image_elements:
 
-    self.driver.quit()
+            image_name = image_element.get_attribute('alt')
+            if image_name == '':
+                image_name = 'demo name'
+            image_link = image_element.get_attribute('src')
 
-    with open('image_url_list.txt', 'w') as f:
-        for item in img_list:
-            f.write("%s\n" % item)
+            print('get image link %s...' % image_name)
+            img_list.append(image_link)
 
-    print('Images link successfully saved! Please check image_url_list.txt!')
+        self.driver.quit()
+
+        with open('image_url_list.txt', 'w') as f:
+            for item in img_list:
+                f.write("%s\n" % item)
+
+        print('Images link successfully saved! Please check image_url_list.txt!')
 
 
 if __name__ == '__main__':
