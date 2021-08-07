@@ -54,6 +54,7 @@ class WebDriverChrome(object):
                 temp3 = list(set(temp2) - set(temp1))
                 for j in temp3:
                     temp1.append(j)
+            print(f'Urls: {len(set(temp1))}')
         
         
         
