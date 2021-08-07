@@ -32,7 +32,7 @@ class WebDriverChrome(object):
 
 
         scroll_counter = 0
-        for i in range(20):
+        for i in range(5000):
             print(f'{scroll_counter} scroll times')
             scroll_counter += 1
             self.driver.execute_script("window.scrollBy(0,"+str(secrets.SystemRandom().uniform(1800,2000))+");")
