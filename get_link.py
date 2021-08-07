@@ -21,6 +21,7 @@ class WebDriverChrome(object):
 
     def save_txt(self):
         temp1 = []
+        temp1_count = 0
 
         URL = "https://unsplash.com/s/photos/fire"
 
@@ -45,6 +46,7 @@ class WebDriverChrome(object):
                 for image_element in image_elements:
                     image_link = image_element.get_attribute('src')
                     temp1.append(image_link)
+                    temp1_count = len(set(temp1))
             else:
                 temp2 = []
                 temp3 = []
@@ -55,7 +57,14 @@ class WebDriverChrome(object):
                 for j in temp3:
                     temp1.append(j)
             print(f'Urls: {len(set(temp1))}')
-            if(len(set(temp1)) > 9500):
+            if(len(set(temp1)) > 1500):
+                temp1_count += len(set(temp1))
+                img_list = list(dict.fromkeys(temp1))
+                print(f'number of urls saved: {len(img_list)}')
+                with open('image_url_list_{temp1_count}.txt', 'w') as f:
+                    for item in img_list:
+                        f.write("%s\n" % item)
+            if(temp1_count > 9500):
                 break
         
         
@@ -68,12 +77,9 @@ class WebDriverChrome(object):
 
             # print('get image link %s...' % image_name)
             # img_list.append(image_link)
+
         self.driver.quit()
-        img_list = list(dict.fromkeys(temp1))
-        print(f'number of urls: {len(img_list)}')
-        with open('image_url_list.txt', 'w') as f:
-            for item in img_list:
-                f.write("%s\n" % item)
+        
 
         print('Images link successfully saved! Please check image_url_list.txt!')
 
