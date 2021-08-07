@@ -29,7 +29,7 @@ class WebDriverChrome(object):
         print('Please wait...', end="\n\n")
         time.sleep(2)
 
-        no_of_pagedowns = 50
+        no_of_pagedowns = 100
 
         scroll_counter = 0
         while no_of_pagedowns:
