@@ -41,6 +41,7 @@ class WebDriverChrome(object):
                 self.driver.execute_script("window.scrollBy(0,-"+str(secrets.SystemRandom().uniform(800,1000))+");")
                 time.sleep(secrets.SystemRandom().uniform(1,1.25))
                 image_elements = self.driver.find_elements_by_class_name('oCCRx')
+                print(f'get elements successfully')
                 # print(image_elements)
                 if (i == 0):
                     for image_element in image_elements:
