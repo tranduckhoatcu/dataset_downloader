@@ -1,3 +1,4 @@
+import argparse
 import requests
 from nordvpn_switcher import initialize_VPN,rotate_VPN
 
@@ -17,10 +18,15 @@ def download(list_urls, image_name='firesmoke_new'):
         for chunk in image_data.iter_content(100000):
             image_file.write(chunk)
         image_file.close()
-        print('Download status: Ok!', end='\n\n')
+        print(image_name+'_'+str(i)+' downloaded!', end='\n\n')
 
 if __name__ == '__main__':
-    with open('image_url_list_5867.txt') as f:
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--txt-path', type=str, default = "image_url_list_full.txt")
+    args = parser.parse_args()
+
+    with open(args.txt_path) as f:
+        print('Working with '+args.txt_path+' file...')
         lines = [line.rstrip() for line in f]
     download(lines)
     
