@@ -72,20 +72,14 @@ class WebDriverChrome(object):
                     break
 
             self.driver.quit()
-            # img_list = list(set(temp1))
-            # print(f'number of urls saved: {len(img_list)}')
-            # with open('image_url_list.txt', 'w') as f:
-            #     for item in img_list:
-            #         f.write("%s\n" % item)
+
         except:
             self.driver.quit()
-            img_list = list(set(temp1))
-            print(f'number of urls saved: {len(img_list)}')
-            with open('image_url_list.txt', 'w') as f:
+            print(f'number of urls saved: {len(temp1)}')
+            with open(f'image_url_list_part'+{str(counter_break)}+'.txt', 'w') as f:
                 for item in img_list:
                     f.write("%s\n" % item)
-
-        print('Images link successfully saved! Please check image_url_list.txt!')
+            print('Images link successfully saved! Please check '+{str(counter_break)}+'.txt'')
 
 
 if __name__ == '__main__':
