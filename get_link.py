@@ -32,45 +32,45 @@ class WebDriverChrome(object):
 
 
         scroll_counter = 0
-        try:
-            for i in range(5000):
-                print(f'{scroll_counter} scroll times')
-                scroll_counter += 1
-                self.driver.execute_script("window.scrollBy(0,"+str(secrets.SystemRandom().uniform(1800,2000))+");")
-                time.sleep(secrets.SystemRandom().uniform(1,1.25))
-                self.driver.execute_script("window.scrollBy(0,-"+str(secrets.SystemRandom().uniform(800,1000))+");")
-                time.sleep(secrets.SystemRandom().uniform(1,1.25))
-                image_elements = self.driver.find_elements_by_class_name('oCCRx')
-                # print(image_elements)
-                if (i == 0):
-                    for image_element in image_elements:
-                        image_link = image_element.get_attribute('src')
-                        temp1.append(image_link)
-                else:
-                    temp2 = []
-                    for image_element in image_elements:
-                        image_link = image_element.get_attribute('src')
-                        temp2.append(image_link)
-                    for i in (temp2):
-                        temp1.append(j)
-                    temp1 = list(set(temp1))
-                print(f'Urls: {len(temp1)}')
-                if(len(temp1) > 9500):
-                    break
-            
-            self.driver.quit()
-            img_list = list(set(temp1))
-            print(f'number of urls saved: {len(img_list)}')
-            with open('image_url_list.txt', 'w') as f:
-                for item in img_list:
-                    f.write("%s\n" % item)
-        except:
-            self.driver.quit()
-            img_list = list(set(temp1))
-            print(f'number of urls saved: {len(img_list)}')
-            with open('image_url_list.txt', 'w') as f:
-                for item in img_list:
-                    f.write("%s\n" % item)
+        # try:
+        for i in range(5000):
+            print(f'{scroll_counter} scroll times')
+            scroll_counter += 1
+            self.driver.execute_script("window.scrollBy(0,"+str(secrets.SystemRandom().uniform(1800,2000))+");")
+            time.sleep(secrets.SystemRandom().uniform(1,1.25))
+            self.driver.execute_script("window.scrollBy(0,-"+str(secrets.SystemRandom().uniform(800,1000))+");")
+            time.sleep(secrets.SystemRandom().uniform(1,1.25))
+            image_elements = self.driver.find_elements_by_class_name('oCCRx')
+            # print(image_elements)
+            if (i == 0):
+                for image_element in image_elements:
+                    image_link = image_element.get_attribute('src')
+                    temp1.append(image_link)
+            else:
+                temp2 = []
+                for image_element in image_elements:
+                    image_link = image_element.get_attribute('src')
+                    temp2.append(image_link)
+                for i in (temp2):
+                    temp1.append(j)
+                temp1 = list(set(temp1))
+            print(f'Urls: {len(temp1)}')
+            if(len(temp1) > 9500):
+                break
+        
+        self.driver.quit()
+        img_list = list(set(temp1))
+        print(f'number of urls saved: {len(img_list)}')
+        with open('image_url_list.txt', 'w') as f:
+            for item in img_list:
+                f.write("%s\n" % item)
+        # except:
+        #     self.driver.quit()
+        #     img_list = list(set(temp1))
+        #     print(f'number of urls saved: {len(img_list)}')
+        #     with open('image_url_list.txt', 'w') as f:
+        #         for item in img_list:
+        #             f.write("%s\n" % item)
 
         print('Images link successfully saved! Please check image_url_list.txt!')
 
