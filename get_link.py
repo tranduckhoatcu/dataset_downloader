@@ -72,12 +72,12 @@ class WebDriverChrome(object):
             with open('image_url_list.txt', 'w') as f:
                 for item in img_list:
                     f.write("%s\n" % item)
-                    
+
         print('Images link successfully saved! Please check image_url_list.txt!')
 
 
 if __name__ == '__main__':
-    vdisplay = Xvfb(width=1920, height=1080)
+    vdisplay = Xvfb(width=800, height=1280)
     vdisplay.start()
     Crawl = WebDriverChrome()
     Crawl.save_txt()
