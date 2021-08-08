@@ -21,7 +21,7 @@ class WebDriverChrome(object):
 
     def save_txt(self):
         temp1 = []
-
+        list_element = []
         URL = "https://unsplash.com/s/photos/fire"
 
         print('Openning Chrome...', end='\n\n')
@@ -41,21 +41,28 @@ class WebDriverChrome(object):
                 self.driver.execute_script("window.scrollBy(0,-"+str(secrets.SystemRandom().uniform(800,1000))+");")
                 time.sleep(secrets.SystemRandom().uniform(1,1.25))
                 image_elements = self.driver.find_elements_by_class_name('oCCRx')
+                
+                
+
                 print(f'get elements successfully')
-                print(f'number of elements: {len(image_elements)}')
+                print(f'number of elements extracted: {len(image_elements)}')
                 # print(image_elements)
                 if (i == 0):
-                    for image_element in image_elements:
-                        image_link = image_element.get_attribute('src')
+                    for element in image_elements:
+                        image_link = element.get_attribute('src')
                         temp1.append(image_link)
+                        list_element.append(element)                        
                 else:
-                    temp2 = []
-                    for image_element in image_elements:
-                        image_link = image_element.get_attribute('src')
-                        temp2.append(image_link)
-                    for j in (temp2):
-                        temp1.append(j)
+                    temp_elements = list(set(image_elements) - set(list_element))
+
+                    for element in temp_elements:
+                        image_link = element.get_attribute('src')
+                        temp1.append(image_link)
+                        list_element.append(element)
+
                     temp1 = list(set(temp1))
+                    list_element = list(set(list_element))
+                     
                 print(f'Urls: {len(temp1)}')
                 if(len(temp1) > 9500):
                     break
