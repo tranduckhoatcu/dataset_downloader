@@ -58,10 +58,9 @@ class WebDriverChrome(object):
                     for element in temp_elements:
                         image_link = element.get_attribute('src')
                         temp1.append(image_link)
-                        list_element.append(element)
 
                     temp1 = list(set(temp1))
-                    list_element = list(set(list_element))
+                    list_element = image_elements
                      
                 print(f'Urls: {len(temp1)}')
                 if(len(temp1) > 9500):
