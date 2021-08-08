@@ -3,11 +3,11 @@ import requests
 from nordvpn_switcher import initialize_VPN,rotate_VPN
 
 def download(list_urls, image_name='firesmoke_new'):
-    instructions = initialize_VPN(area_input=['Vietnam','Hong Kong','Singapore','Thailand'], skip_settings=1)
-    rotate_VPN(instructions)
+    # instructions = initialize_VPN(area_input=['Vietnam','Hong Kong','Singapore','Thailand'], skip_settings=1)
+    # rotate_VPN(instructions)
     for i, j in enumerate(list_urls):
-        if (i % 300 == 0):
-            rotate_VPN(instructions)
+        # if (i % 300 == 0):
+            # rotate_VPN(instructions)
         image_data = requests.get(j)
         try:
             image_data.raise_for_status()
