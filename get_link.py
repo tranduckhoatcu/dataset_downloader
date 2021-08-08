@@ -48,26 +48,25 @@ class WebDriverChrome(object):
                         temp1.append(image_link)
                 else:
                     temp2 = []
-                    temp3 = []
                     for image_element in image_elements:
                         image_link = image_element.get_attribute('src')
                         temp2.append(image_link)
-                    temp3 = list(set(temp2) - set(temp1))
-                    for j in temp3:
+                    for i in (temp2):
                         temp1.append(j)
-                print(f'Urls: {len(set(temp1))}')
-                if(len(set(temp1)) > 9500):
+                    temp1 = list(set(temp1))
+                print(f'Urls: {len(temp1)}')
+                if(len(temp1) > 9500):
                     break
             
             self.driver.quit()
-            img_list = list(dict.fromkeys(temp1))
+            img_list = list(set(temp1))
             print(f'number of urls saved: {len(img_list)}')
             with open('image_url_list.txt', 'w') as f:
                 for item in img_list:
                     f.write("%s\n" % item)
         except:
             self.driver.quit()
-            img_list = list(dict.fromkeys(temp1))
+            img_list = list(set(temp1))
             print(f'number of urls saved: {len(img_list)}')
             with open('image_url_list.txt', 'w') as f:
                 for item in img_list:
