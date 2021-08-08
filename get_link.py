@@ -15,7 +15,7 @@ class WebDriverChrome(object):
         options.add_argument('--user-data-dir=/home/test1/.config/google-chrome/Default')
         options.add_argument(f"--no-sandbox")
         options.add_argument(f"--disable-dev-shm-usage")
-        driver = webdriver.Chrome(options=options)
+        driver = webdriver.Chrome(version_main=91,options=options)
         return driver
 
 
