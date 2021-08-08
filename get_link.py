@@ -21,7 +21,6 @@ class WebDriverChrome(object):
 
     def save_txt(self):
         temp1 = []
-        temp1_count = 0
 
         URL = "https://unsplash.com/s/photos/fire"
 
@@ -33,55 +32,47 @@ class WebDriverChrome(object):
 
 
         scroll_counter = 0
-        for i in range(5000):
-            print(f'{scroll_counter} scroll times')
-            scroll_counter += 1
-            self.driver.execute_script("window.scrollBy(0,"+str(secrets.SystemRandom().uniform(1800,2000))+");")
-            time.sleep(secrets.SystemRandom().uniform(1,1.25))
-            self.driver.execute_script("window.scrollBy(0,-"+str(secrets.SystemRandom().uniform(800,1000))+");")
-            time.sleep(secrets.SystemRandom().uniform(1,1.25))
-            image_elements = self.driver.find_elements_by_class_name('oCCRx')
-            # print(image_elements)
-            if (i == 0):
-                for image_element in image_elements:
-                    image_link = image_element.get_attribute('src')
-                    temp1.append(image_link)
-                    temp1_count = len(set(temp1))
-            else:
-                temp2 = []
-                temp3 = []
-                for image_element in image_elements:
-                    image_link = image_element.get_attribute('src')
-                    temp2.append(image_link)
-                temp3 = list(set(temp2) - set(temp1))
-                for j in temp3:
-                    temp1.append(j)
-            print(f'Urls: {len(set(temp1))}')
-            if(len(set(temp1)) > 1500):
-                temp1_count += len(set(temp1))
-                img_list = list(dict.fromkeys(temp1))
-                print(f'number of urls saved: {len(img_list)}')
-                with open('image_url_list_{temp1_count}.txt', 'w') as f:
-                    for item in img_list:
-                        f.write("%s\n" % item)
-                temp1 = []
-            if(temp1_count > 9500):
-                break
-        
-        
-        
+        try:
+            for i in range(5000):
+                print(f'{scroll_counter} scroll times')
+                scroll_counter += 1
+                self.driver.execute_script("window.scrollBy(0,"+str(secrets.SystemRandom().uniform(1800,2000))+");")
+                time.sleep(secrets.SystemRandom().uniform(1,1.25))
+                self.driver.execute_script("window.scrollBy(0,-"+str(secrets.SystemRandom().uniform(800,1000))+");")
+                time.sleep(secrets.SystemRandom().uniform(1,1.25))
+                image_elements = self.driver.find_elements_by_class_name('oCCRx')
+                # print(image_elements)
+                if (i == 0):
+                    for image_element in image_elements:
+                        image_link = image_element.get_attribute('src')
+                        temp1.append(image_link)
+                else:
+                    temp2 = []
+                    temp3 = []
+                    for image_element in image_elements:
+                        image_link = image_element.get_attribute('src')
+                        temp2.append(image_link)
+                    temp3 = list(set(temp2) - set(temp1))
+                    for j in temp3:
+                        temp1.append(j)
+                print(f'Urls: {len(set(temp1))}')
+                if(len(set(temp1)) > 9500):
+                    break
             
-            # image_name = image_element.get_attribute('alt')
-            # if image_name == '':
-            #     image_name = 'demo name'
-            
-
-            # print('get image link %s...' % image_name)
-            # img_list.append(image_link)
-
-        self.driver.quit()
-        
-
+            self.driver.quit()
+            img_list = list(dict.fromkeys(temp1))
+            print(f'number of urls saved: {len(img_list)}')
+            with open('image_url_list.txt', 'w') as f:
+                for item in img_list:
+                    f.write("%s\n" % item)
+        except:
+            self.driver.quit()
+            img_list = list(dict.fromkeys(temp1))
+            print(f'number of urls saved: {len(img_list)}')
+            with open('image_url_list.txt', 'w') as f:
+                for item in img_list:
+                    f.write("%s\n" % item)
+                    
         print('Images link successfully saved! Please check image_url_list.txt!')
 
 
