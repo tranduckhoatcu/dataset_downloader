@@ -59,7 +59,7 @@ class WebDriverChrome(object):
                 
                 print(f'Urls: {len(temp1)}')
                 
-                if(len(temp1) > 1000):
+                if(len(temp1) > 50):
                     print(f'number of urls saved: {len(temp1)}')
                     with open(f'image_url_list_part_'+str(counter_break)+'.txt', 'w') as f:
                         for item in temp1:
