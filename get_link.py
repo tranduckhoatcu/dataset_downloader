@@ -21,7 +21,6 @@ class WebDriverChrome(object):
 
     def save_txt(self):
         temp1 = []
-        counter_break = 0
 
         URL = "https://unsplash.com/s/photos/fire"
 
@@ -43,6 +42,7 @@ class WebDriverChrome(object):
                 time.sleep(secrets.SystemRandom().uniform(1,1.25))
                 image_elements = self.driver.find_elements_by_class_name('oCCRx')
                 print(f'get elements successfully')
+                print(f'number of elements: {len(image_elements)}')
                 # print(image_elements)
                 if (i == 0):
                     for image_element in image_elements:
@@ -56,30 +56,23 @@ class WebDriverChrome(object):
                     for j in (temp2):
                         temp1.append(j)
                     temp1 = list(set(temp1))
-                
                 print(f'Urls: {len(temp1)}')
-                
-                if(len(temp1) > 1000):
-                    print(f'number of urls saved: {len(temp1)}')
-                    with open(f'image_url_list_part_'+str(counter_break)+'.txt', 'w') as f:
-                        for item in temp1:
-                            f.write("%s\n" % item)
-                    print(f'Images link successfully saved! Please check image_url_list_part_{counter_break}.txt')
-                    temp1 = []
-                    counter_break+=1
-                
-                if (counter_break == 9):
+                if(len(temp1) > 9500):
                     break
-
+            
             self.driver.quit()
-
+            print(f'number of urls saved: {len(temp1)}')
+            with open('image_url_list.txt', 'w') as f:
+                for item in temp1:
+                    f.write("%s\n" % item)
         except:
             self.driver.quit()
             print(f'number of urls saved: {len(temp1)}')
-            with open(f'image_url_list_part_last.txt', 'w') as f:
+            with open('image_url_list.txt', 'w') as f:
                 for item in temp1:
                     f.write("%s\n" % item)
-            print(f'Images link successfully saved! Please check image_url_list_part_last.txt')
+
+        print('Images link successfully saved! Please check image_url_list.txt!')
 
 
 if __name__ == '__main__':
