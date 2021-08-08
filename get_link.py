@@ -61,7 +61,7 @@ class WebDriverChrome(object):
                 
                 if(len(temp1) > 1000):
                     print(f'number of urls saved: {len(temp1)}')
-                    with open(f'image_url_list_part_{counter_break}.txt', 'w') as f:
+                    with open(f'image_url_list_part_'+str(counter_break)+'.txt', 'w') as f:
                         for item in temp1:
                             f.write("%s\n" % item)
                     print(f'Images link successfully saved! Please check image_url_list_part_{counter_break}.txt')
@@ -76,7 +76,7 @@ class WebDriverChrome(object):
         except:
             self.driver.quit()
             print(f'number of urls saved: {len(temp1)}')
-            with open(f'image_url_list_part'{counter_break}'.txt', 'w') as f:
+            with open(f'image_url_list_part'+str(counter_break)+'.txt', 'w') as f:
                 for item in temp1:
                     f.write("%s\n" % item)
             print(f'Images link successfully saved! Please check image_url_list_part_{counter_break}.txt')
